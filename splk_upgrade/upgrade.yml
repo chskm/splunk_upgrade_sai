@@ -1,0 +1,52 @@
+---
+- hosts: all
+  serial: 1
+  tasks:
+  - name: Copy binary file to all servers
+    synchronize:
+      src: splunk-7.3.7-9d9aa3f78593-Linux-x86_64.tgz
+      dest: /tmp
+
+  - name: checking splunk status
+    command: /opt/splunk/bin/splunk status
+    register: splunk_status
+
+  - debug:
+      msg: "{{ splunk_status.stdout }}"
+
+  - name: checking splunk version
+    command: /opt/splunk/bin/splunk version
+    register: splunk_version
+
+  - debug:
+      msg: "{{ splunk_version.stdout }}"
+
+  - name: backing up /opt/splunk/etc
+    archive:
+      path: /opt/splunk/etc
+      dest: /tmp/splk-bkp-721.tgz
+
+  - name: stopping splunk
+    command: /opt/splunk/bin/splunk stop
+
+  - name: upgrading splunk to 737
+    unarchive:
+      src: /tmp/splunk-7.3.7-9d9aa3f78593-Linux-x86_64.tgz
+      dest: /opt/
+
+  - name: starting splunk post upgrade
+    command: /opt/splunk/bin/splunk start --accept-license --answer-yes
+
+  - name: checking splunk status post upgrade
+    command: /opt/splunk/bin/splunk status
+    register: splunk_post_status
+
+  - debug:
+      msg: "{{ splunk_post_status.stdout }}"
+
+  - name: Check Splunk version
+    command: cat /opt/splunk/etc/splunk.version
+    register: version_post_status
+
+  - debug:
+      msg: "{{ version_post_status.stdout }}" 

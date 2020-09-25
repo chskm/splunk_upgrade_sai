@@ -1,0 +1,6 @@
+- name: Restarrting splunk
+  command: /opt/splunk/bin/splunk restart
+  register: splk_restart
+
+- debug:
+    msg: "{{ splk_restart.stdout }}"

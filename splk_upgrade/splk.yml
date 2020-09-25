@@ -1,0 +1,14 @@
+---
+- name: splunk upgrade to 806 
+  hosts: server_A
+  serial: 1
+  roles:
+    - splunk_binary
+    - splunk_status
+    - splunk_backup
+    - splunk_version
+    - splunk_stop
+    - splunk_upgrade
+    - splunk_start
+    - splunk_status
+    - splunk_version

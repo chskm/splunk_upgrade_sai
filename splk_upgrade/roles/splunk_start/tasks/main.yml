@@ -1,0 +1,6 @@
+- name: Starting Splunk Services
+  command: /opt/splunk/bin/splunk start --accept-license --answer-yes
+  register: splk_start
+
+- debug:
+    msg: "{{ splk_start.stdout }}"

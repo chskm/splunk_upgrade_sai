@@ -1,0 +1,4 @@
+- name: backing up /opt/splunk/etc
+  archive:
+    path: /opt/splunk/etc
+    dest: /tmp/splk-bkp-721.tgz

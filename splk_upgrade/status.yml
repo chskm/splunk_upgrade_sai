@@ -1,0 +1,11 @@
+---
+- hosts: all
+  serial: 1
+  tasks:
+  - name: checking splunk status
+    command: /opt/splunk/bin/splunk status
+    register: splunk_status
+
+  - debug:
+      msg: "{{ splunk_status.stdout }}"
+

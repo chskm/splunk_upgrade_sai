@@ -1,0 +1,6 @@
+- name: checking splunk status
+  command: /opt/splunk/bin/splunk status
+  register: splk_status
+
+- debug:
+    msg: "{{ splk_status.stdout }}"

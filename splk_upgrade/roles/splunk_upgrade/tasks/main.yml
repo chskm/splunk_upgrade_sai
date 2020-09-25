@@ -1,0 +1,4 @@
+ - name: upgrading splunk to 737
+   unarchive:
+     src: /tmp/{{ splunk_binary }}
+     dest: /opt/

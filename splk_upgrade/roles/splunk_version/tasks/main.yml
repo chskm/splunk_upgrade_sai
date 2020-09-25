@@ -1,0 +1,6 @@
+- name: checking splunk version
+  command: /opt/splunk/bin/splunk version
+  register: splunk_version
+
+- debug:
+    msg: "{{ splunk_version.stdout }}"

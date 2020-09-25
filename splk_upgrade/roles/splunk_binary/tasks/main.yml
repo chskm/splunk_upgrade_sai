@@ -1,0 +1,4 @@
+ - name: Copy binary file to all servers
+   synchronize:
+     src: /home/saiadmin/{{ splunk_binary }}
+     dest: /tmp
